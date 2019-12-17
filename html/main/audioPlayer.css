@@ -1,0 +1,157 @@
+body{
+
+    /*background: #00F260;  !* fallback for old browsers *!*/
+    background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+.btn{
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+.play{
+    display: block;
+}
+
+.pause{
+    display: none;
+}
+.Voice{
+    width: 132px;
+    height: 26px;
+    background-image:-webkit-linear-gradient(right,#ff5e3a,#d552ff,#5e2dff);
+    border-radius: 10px;
+    position: absolute;
+    top:87.1%;
+    left:57.5%;
+    font-family: sans-serif;
+
+
+}
+
+
+
+.audioPlayer{
+    position: absolute;
+    width: 570px;
+    height: 42px;
+    top:90%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    margin: 0 auto;
+    padding-top: 14px;
+    padding-left: 20px;
+    background-image:-webkit-linear-gradient(right,#ff5e3a,#d552ff,#5e2dff);
+}
+
+.totalProgress{
+    cursor: pointer;
+    position: absolute;
+    top: 26px;
+    left: 72px;
+    width: 500px;
+    height: 8px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.currentProgress{
+    width: 0;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #00a1d6;
+}
+
+.time{
+    display: block;
+    margin-left: 10px;
+    position: absolute;
+    top: 35px;
+    left: 463px;
+    color: white;
+}
+
+
+ul {
+    list-style-type:none;
+    margin:0;
+    padding:20px;
+}
+li{
+    display: inline;
+    padding:20px;
+    font-size: 32px;
+    padding-bottom: 2px ;
+    border-bottom: 2px solid #0fffee;
+}
+.top-bar {
+    width: 1200px;
+}
+.logo{
+    float: left;
+    width: 200px;
+    height: 100%;
+    padding-right: 20px;
+    color: white;
+}
+
+ a{
+     text-decoration: none;
+     color: white;
+ }
+
+.MusicList span{
+    font-family: sans-serif;
+    font-size: 18px;
+    color: white;
+    border-collapse: collapse;
+}
+tr:hover{
+    background: deepskyblue;
+
+}
+
+
+.MusicList{
+    position: absolute;
+    width: 570px;
+    top:150px;
+    left:1200px;
+    transform: translate(-50%,-50%);
+    border-left: 4px solid deepskyblue;
+    text-align: center;
+}
+table{
+    position: absolute;
+    border: 5px solid deepskyblue;
+}
+.User{
+    position: absolute;
+    top:20%;
+    left: 3%;
+    border: 2px solid deepskyblue;
+    width: 500px;
+    height: 200px;
+}
+
+
+.User img{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top:10px;
+}
+.pic{
+    position: absolute;
+    margin-left: 0;
+    padding-left: 0;
+
+
+}

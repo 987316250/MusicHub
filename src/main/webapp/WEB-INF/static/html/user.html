@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.z01.com/v4/dist/css/zico.min.css" >
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//code.z01.com/v4/dist/js/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        table tbody tr td{
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).on('click','#de',function () {
+            var id=$(this).parent().parent().find("td").eq(0).text();
+            $.ajax({
+                url:"/user/delete",
+                method:"post",
+                data: {"id":id},
+                datatype:"json",
+                success:function (data) {
+                    var temp=eval('('+data+')');
+                    if(temp.result=="true")
+                    {
+                        alert("删除成功");
+                    }
+                    else
+                    {
+                        alert("删除失败");
+                    }
+                }
+            })
+            $(this).parent().parent().hide();
+        })
+    </script>
+</head>
+<body>
+<div class="container"  style="margin-top: 100px">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>用户管理<i class="zi zi_user" zico="用户标志"></i></strong>
+        </div>
+        <div class="panel-body">
+            <form class="form" >
+                <input placeholder="请输入用户名字" value=""/>
+                <button class="btn btn-danger btn-small">Submit</button>
+            </form>
+        </div>
+        <!-- Table -->
+        <table class="table table-bordered  table-hover table-responsive">
+            <tbody>
+            <tr class="warning">
+                <td>用户id</td>
+                <td>用户账号</td>
+                <td>用户姓名</td>
+                <td>用户密码</td>
+                <td>手机号</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-danger">删除</button> <button class="btn btn-warning">修改</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

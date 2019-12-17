@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.Singer_imageMapper">
+  <resultMap id="BaseResultMap" type="com.web.pojo.Singer_image">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="singer_id" jdbcType="INTEGER" property="singerId" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, singer_id, location
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from singer_image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from singer_image
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.web.pojo.Singer_image">
+    insert into singer_image (id, singer_id, location
+      )
+    values (#{id,jdbcType=INTEGER}, #{singerId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.web.pojo.Singer_image">
+    insert into singer_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="singerId != null">
+        singer_id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="singerId != null">
+        #{singerId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.pojo.Singer_image">
+    update singer_image
+    <set>
+      <if test="singerId != null">
+        singer_id = #{singerId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.pojo.Singer_image">
+    update singer_image
+    set singer_id = #{singerId,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectBySingerId"  parameterType="Integer"  resultType="com.web.pojo.Singer_image">
+      select * from singer_image where singer_id =#{id}
+  </select>
+</mapper>

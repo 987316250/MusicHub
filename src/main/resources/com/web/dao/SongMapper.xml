@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.SongMapper">
+  <resultMap id="BaseResultMap" type="com.web.pojo.Song">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="singer_id" jdbcType="INTEGER" property="singerId" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+  </resultMap>
+  <resultMap id="MyResult1" type="com.web.pojo.SongAndSinger">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <!--做了一次级联查询 使用的子查询关联到对应的属性-->
+    <association property="category" javaType="com.web.pojo.Category" column="category_id" select="com.web.dao.CategoryMapper.selectByPrimaryKey" />
+    <association property="singer" javaType="com.web.pojo.Singer" column="singer_id"  select="com.web.dao.SingerMapper.selectByPrimaryKey" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, singer_id, location, uploadTime, category_id
+  </sql>
+  <select id="selectAll" resultMap="MyResult1">
+      select * from song
+  </select>
+  <!--模糊查询-->
+  <select id="selectAllByParameter"  parameterType="String" resultMap="MyResult1">
+    select * from song where name like concat('%',#{musicName},'%')
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from song
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from song
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.web.pojo.Song">
+    insert into song (id, name, singer_id, 
+      location, uploadTime, category_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{singerId,jdbcType=INTEGER}, 
+      #{location,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.web.pojo.Song">
+    insert into song
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+      id,
+    </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="singerId != null">
+        singer_id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="singerId != null">
+        #{singerId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.pojo.Song">
+    update song
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="singerId != null">
+        singer_id = #{singerId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.pojo.Song">
+    update song
+    set name = #{name,jdbcType=VARCHAR},
+      singer_id = #{singerId,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      category_id = #{categoryId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
